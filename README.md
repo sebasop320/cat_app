@@ -22,15 +22,24 @@ Author: @sebasop320
 
 ---
 
+# Random Cat App
+
+The Random Cat App is a simple application that displays a different cat image every 2 seconds.
+
 ## Why?
-The app is designed to display a different cat image every 2 seconds.
+
+The app is designed to provide users with a fun and entertaining experience by showcasing various adorable cat pictures.
 
 ## How to Download?
-Check the releases.
 
----
+To download the Random Cat App, please visit the [releases](https://github.com/sebasop320/cat_app/releases) page.
 
 ## Contribution
+
+We welcome contributions to enhance the Random Cat App. If you'd like to contribute, please follow these steps:
+
 1. Fork the repository.
-2. Make the desired changes.
+2. Make the desired changes to improve the app.
 3. Create a pull request to merge your changes back into the main repository.
+
+We appreciate your contributions and look forward to making the Random Cat App even better all together!
