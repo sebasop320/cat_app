@@ -4,16 +4,11 @@ import tkinter.messagebox as messagebox
 import threading
 import platform
 import webbrowser
-from updater import check_updates
-from updater import Version
 import io
 import cv2
 import numpy as np
 from PIL import ImageTk, Image
-import time
 
-# Define the version as a variable so it updates automatically
-#Version = "Stable V1.O.1"
 # Define the API endpoint for fetching cat images
 CAT_API_URL = "https://api.thecatapi.com/v1/images/search"
 
@@ -44,7 +39,6 @@ class CatApp:
         app_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="App", menu=app_menu)
         app_menu.add_command(label="Version", command=self.show_version)
-        app_menu.add_command(label="Updates", command=self.show_updates)
         app_menu.add_command(label="Usage", command=self.show_usage)
 
     def create_image_label(self):
@@ -91,14 +85,9 @@ class CatApp:
     def open_image_url(self):
         if self.image_url:
             webbrowser.open(self.image_url)
-    # Define the menu of options
-    def show_version(self):
-        messagebox.showinfo("App Version", (Version))
 
-    def show_updates(self):
-        messagebox.showinfo("Updates" , "The updates are seamlessly delivered to your application.")
-        time.sleep(1)
-        check_updates() 
+    def show_version(self):
+        messagebox.showinfo("App Version", "Random Cat App v1.0")
 
     def show_usage(self):
         messagebox.showinfo("App Usage", "Click 'Refresh' to fetch a new random cat image.")
@@ -113,16 +102,13 @@ def run_app():
 
 
     # Set the window icon
-    
-      # Add this line with the path to your icon file
+    window.iconbitmap("cat.png")  # Add this line with the path to your icon file
 
     app = CatApp(window)
     window.mainloop()
 
 
 if __name__ == "__main__":
-
-    check_updates()
     # Check the platform to determine the appropriate way to run the app
     # macOS
     if platform.system() == "Darwin":

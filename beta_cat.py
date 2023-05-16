@@ -1,21 +1,21 @@
 import requests
 import tkinter as tk
 import tkinter.messagebox as messagebox
-import threading
 import platform
 import webbrowser
-from updater import check_updates
-from updater import Version
-import io
-import cv2
-import numpy as np
 from PIL import ImageTk, Image
-import time
+import io
 
 # Define the version as a variable so it updates automatically
-#Version = "Stable V1.O.1"
+Version = "Stable V1.1"
+# Define the URL for the GitHub releases
+GITHUB_RELEASES_URL = "https://github.com/sebasop320/cat_app/releases"
 # Define the API endpoint for fetching cat images
-CAT_API_URL = "https://api.thecatapi.com/v1/images/search"
+CAT_API_URL = "https://api.thecatapi.com/v1/images/search?size=full"
+
+# Define the desired image size
+IMAGE_WIDTH = 400
+IMAGE_HEIGHT = 300
 
 class CatApp:
     def __init__(self, window):
@@ -37,14 +37,16 @@ class CatApp:
         menubar = tk.Menu(self.window)
         self.window.config(menu=menubar)
 
+        # File menu
         file_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="File", menu=file_menu)
         file_menu.add_command(label="Exit", command=self.window.quit)
 
+        # App menu
         app_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="App", menu=app_menu)
+        app_menu.add_command(label="Update", command=self.show_updates)
         app_menu.add_command(label="Version", command=self.show_version)
-        app_menu.add_command(label="Updates", command=self.show_updates)
         app_menu.add_command(label="Usage", command=self.show_usage)
 
     def create_image_label(self):
@@ -71,11 +73,8 @@ class CatApp:
 
         # Download the image and display it
         image_data = requests.get(self.image_url).content
-        image = cv2.imdecode(
-            np.frombuffer(image_data, np.uint8), cv2.IMREAD_COLOR
-        )
-        image = cv2.resize(image, (400, 300))
-        img = Image.fromarray(image)
+        img = Image.open(io.BytesIO(image_data))
+        img = img.resize((IMAGE_WIDTH, IMAGE_HEIGHT))
         photo = ImageTk.PhotoImage(image=img)
 
         self.image_label.configure(image=photo)
@@ -86,22 +85,32 @@ class CatApp:
         self.image_cache.append(self.image_url)
 
         # Schedule the next image fetch after 2 seconds
-        self.window.after(2000, self.fetch_cat_image)
+        self.image_label.after(2000, self.fetch_cat_image)
 
-    def open_image_url(self):
-        if self.image_url:
-            webbrowser.open(self.image_url)
-    # Define the menu of options
+    def check_for_updates(self):
+        try:
+            response = requests.get(GITHUB_RELEASES_URL)
+            latest_version = response.json()[0]["stable_main"]
+
+            if latest_version != Version:
+                messagebox.showinfo(
+                    "Update Available",
+                    f"A new version ({latest_version}) of the Cat App is available. Please visit the GitHub releases page to download and install the update."
+                )
+        except requests.RequestException:
+            # Error occurred while checking for updates
+            pass
+
     def show_version(self):
-        messagebox.showinfo("App Version", (Version))
+        messagebox.showinfo("App Version", "Random Cat App " + Version)
 
-    def show_updates(self):
-        messagebox.showinfo("Updates" , "The updates are seamlessly delivered to your application.")
-        time.sleep(1)
-        check_updates() 
+def show_updates(self):
+    self.check_for_updates()
+    messagebox.showinfo("Update", Version)
 
-    def show_usage(self):
-        messagebox.showinfo("App Usage", "Click 'Refresh' to fetch a new random cat image.")
+def show_usage(self):
+    messagebox.showinfo("App Usage", "Click 'Refresh' to fetch a new random cat image.")
+
 
 def run_app():
     window = tk.Tk()
@@ -111,18 +120,13 @@ def run_app():
     window.geometry("400x350")
     window.eval('tk::PlaceWindow . center')
 
-
     # Set the window icon
-    
-      # Add this line with the path to your icon file
+    window.iconbitmap("cat.png")  # Add this line with the path to your icon file
 
     app = CatApp(window)
     window.mainloop()
 
-
 if __name__ == "__main__":
-
-    check_updates()
     # Check the platform to determine the appropriate way to run the app
     # macOS
     if platform.system() == "Darwin":

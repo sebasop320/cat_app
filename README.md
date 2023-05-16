@@ -2,6 +2,11 @@
 Author: @sebasop320
 
 ---
+## How to Download?
+
+To download the Random Cat App, please visit the [releases](https://github.com/sebasop320/cat_app/releases) page.
+
+---
 
 ## Usage
 1. Clone the repository: `git clone https://github.com/sebasop320/cat_app.git`
@@ -30,9 +35,7 @@ The Random Cat App is a simple application that displays a different cat image e
 
 The app is designed to provide users with a fun and entertaining experience by showcasing various adorable cat pictures.
 
-## How to Download?
 
-To download the Random Cat App, please visit the [releases](https://github.com/sebasop320/cat_app/releases) page.
 
 ## Contribution
 
