@@ -31,6 +31,6 @@ Check the releases.
 ---
 
 ## Contribution
-Fork the repository.
-Make the desired changes.
-Create a pull request to merge your changes back into the main repository.
+1. Fork the repository.
+2. Make the desired changes.
+3. Create a pull request to merge your changes back into the main repository.
