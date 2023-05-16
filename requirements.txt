@@ -1,5 +1,0 @@
-requests
-tkinter
-opencv-python
-numpy
-Pillow
