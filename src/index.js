@@ -1,8 +1,13 @@
 //index.js
 const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
+const checkForUpdates = require('./update')
 
 let mainWindow;
+
+// Initialize the auto-updater
+checkForUpdates();
+
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
@@ -20,7 +25,7 @@ const createWindow = () => {
 
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => {
     mainWindow = null;
