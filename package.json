@@ -1,7 +1,7 @@
 {
   "name": "cat_app",
   "productName": "cat app",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Cat App!",
   "main": "src/index.js",
   "scripts": {
@@ -16,8 +16,18 @@
     "name": "sebasop320",
     "email": "sebasop320@gmail.com"
   },
+  "build": {
+    "appId": "com.sebasopdev.cat_app",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  },
   "license": "MIT",
   "dependencies": {
+    "@trodi/electron-splashscreen": "^1.0.2",
     "axios": "^1.6.0",
     "electron-squirrel-startup": "^1.0.0"
   },

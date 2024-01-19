@@ -42,8 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const cachedImageUrl = cache[cache.length - 1]; // Display the latest cached image
       if (catImage) {
         catImage.src = cachedImageUrl;
-        catImage.width = 400;
-        catImage.height = 300;
+        catImage.style.width = '100%';
+        catImage.style.height = '100%';
+        catImage.style.objectFit = 'cover'; // This will ensure that the aspect ratio of the image is maintained
       }
     }
   }
