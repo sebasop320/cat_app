@@ -3,7 +3,7 @@ const axios = require('axios'); // You can use Axios to make HTTP requests
 
 // Function to compare app version with the latest GitHub release
 async function checkForUpdates() {
-  const currentVersion = 'V1.0.0'; // Your app's current version
+  const currentVersion = 'V1.1.0'; // Your app's current version
   const owner = 'sebasop320'; // GitHub repository owner
   const repo = 'cat_app'; // GitHub repository name
 
